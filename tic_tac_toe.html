@@ -1,0 +1,109 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>Tic Tac Toe</title>
+	<!-- <link rel="stylesheet" type="text/css" href="normalize.css"> -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="column">
+			<p>Tic Tac Toe</p>
+		</div>
+
+		<div id="board"> 
+			<div id="square0" class = "square" onclick="userPick(0)"></div>
+			<div id="square1" class = "square" onclick="userPick(1)"></div>
+			<div id="square2" class = "square" onclick="userPick(2)"></div>
+			<div id="square3" class = "square" onclick="userPick(3)"></div>
+			<div id="square4" class = "square" onclick="userPick(4)"></div>
+			<div id="square5" class = "square" onclick="userPick(5)"></div>
+			<div id="square6" class = "square" onclick="userPick(6)"></div>
+			<div id="square7" class = "square" onclick="userPick(7)"></div>
+			<div id="square8" class = "square" onclick="userPick(8)"></div>
+		</div>
+	</div>
+
+
+
+
+<script type="text/javascript">
+	
+		var winningCombo = [
+			[0, 1, 2],
+			[3, 4, 5],
+			[6, 7, 8],
+			[0, 3, 6],
+			[1, 4, 7],
+			[2, 5, 8],
+			[2, 4, 6],
+		];
+
+		function userPick(number) {
+			console.log(number);
+
+			//function squareRename() {
+				//square = document.getElementById('square' + number.toString());
+
+			//};
+
+			/*var board = document.getElementById("board");
+			for (var i = 0; i < 9; ++i){
+				if (number == i){
+					newDiv = document.getElementbyClass("square");
+					newDiv.addEventListener("mouseenter", function(){
+					square.style.backgroundColor = "grey";
+					}		
+
+				}
+			}
+		}	
+	
+		// var newDiv = document.getElementById("square0");
+		// newDiv.addEventListener("mouseleave", function(){
+			// this.style.backgroundColor = null;
+		// });
+		
+		// if (i >= 3){
+			// newDiv.className = "topSide";
+		// }
+		// if (i % 3 != 0){
+			// newDiv.className = "leftSide";
+		// }
+
+
+
+
+
+
+
+
+
+	// var board = document.getElementById("board");
+	// for (var i = 0; i < 9; ++i){
+		// var newDiv = document.createElement("div");
+		// board.appendChild(newDiv);
+		// newDiv.innerHTML = i;
+		// newDiv.addEventListener("mouseenter", function(){
+			// this.style.backgroundColor = "grey";
+		// });
+		// newDiv.addEventListener("mouseleave", function(){
+			// this.style.backgroundColor = null;
+		// });
+		// if (i >= 3){
+			// newDiv.className = "topSide";
+		// }
+		// if (i % 3 != 0){
+			// newDiv.className = "leftSide";
+		// }
+
+	// }
+		
+
+</script>
+</body>
+
+
+
+</html
