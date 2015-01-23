@@ -25,6 +25,10 @@
 	height: 320px;
 }
 
+.square:hover {
+	background-color: #5A3C69;
+}
+
 .square{ 
 	width: 32%;
 	height: 100px;
@@ -34,52 +38,65 @@
 	color: white;
 }
 
-#square0 {
+.square0 {
 	border-right: 5px solid black;
 	border-bottom: 5px solid black;
 	background-color: #708FA3;
 }
 
-#square1 {
+.square1 {
 	border-right: 5px solid black;
 	border-bottom: 5px solid black;
 	background-color: #486F88;
 }
 
-#square2 {
+.square2 {
 	border-bottom: 5px solid black;
 	background-color: #123852;
 }
 
-#square3 {
+.square3 {
 	border-right: 5px solid black;
 	border-bottom: 5px solid black;
 	background-color: #032236;
 }
 
-#square4 {
+.square4 {
 	border-right: 5px solid black;
 	border-bottom: 5px solid black;
 	background-color: #708FA3;
 }
 
-#square5 {
+.square5 {
 	border-bottom: 5px solid black;
 	background-color: #486F88;
 }
 
-#square6 {
+.square6 {
 	border-right: 5px solid black;
 	background-color: #123852;
 }
 
-#square7 {
+.square7 {
 	border-right: 5px solid black;
 	background-color: #032236;
 }
 
-#square8 {
+.square8 {
 	background-color: #708FA3;
+}
+
+.players{
+	width: 67.5%;
+}
+
+.playerOne{
+	float: left;
+	width: 100%;
+}
+
+.playerTwo{
+	float: left;
 }
 /*
 div#board > div {

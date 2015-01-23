@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Tic Tac Toe</title>
-	<!-- <link rel="stylesheet" type="text/css" href="normalize.css"> -->
+	<<link rel="stylesheet" type="text/css" href="normalize.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -13,15 +13,20 @@
 		</div>
 
 		<div id="board"> 
-			<div id="square0" class = "square"></div>
-			<div id="square1" class = "square"></div>
-			<div id="square2" class = "square"></div>
-			<div id="square3" class = "square"></div>
-			<div id="square4" class = "square"></div>
-			<div id="square5" class = "square"></div>
-			<div id="square6" class = "square"></div>
-			<div id="square7" class = "square"></div>
-			<div id="square8" class = "square"></div>
+			<div class="square0 square"></div>
+			<div class="square1 square"></div>
+			<div class="square2 square"></div>
+			<div class="square3 square"></div>
+			<div class="square4 square"></div>
+			<div class="square5 square"></div>
+			<div class="square6 square"></div>
+			<div class="square7 square"></div>
+			<div class="square8 square"></div>
+		</div>
+
+		<div class="players">
+		<span class= "playerOne">Player One</span>
+		<span class="playerTwo">Player Two</span>
 		</div>
 	</div>
 
@@ -49,9 +54,12 @@
 	var squares = document.getElementsByClassName("square"); //Pulls down all squares
 	for (var i = 0; i<squares.length; i++){ 
 		var square = squares[i]; //identifies each unique square as it passes through the loop
+
 		square.addEventListener('click', makeHandler(i));  //Activates function MakeHandler when a square is clicked
 	}
-	
+
+
+
 	// Pushes each square number into respective player's array 
 	function makeHandler(num){
 		return function() {
@@ -66,8 +74,13 @@
 					counter += 1;
 				}
 			
-		};
+		}
 	}
+	// to add arrow with turn - javascript innerHTML and display none if not turn.
+
+
+
+	
 
 
 
