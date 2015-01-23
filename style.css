@@ -29,6 +29,9 @@
 	width: 32%;
 	height: 100px;
 	float: left;
+	font-size: 80px;
+	text-align: center;
+	color: white;
 }
 
 #square0 {
@@ -51,49 +54,31 @@
 #square3 {
 	border-right: 5px solid black;
 	border-bottom: 5px solid black;
-	width: 32%;
-	height: 100px;
-	float: left;
 	background-color: #032236;
 }
 
 #square4 {
 	border-right: 5px solid black;
 	border-bottom: 5px solid black;
-	width: 32%;
-	height: 100px;
-	float: left;
 	background-color: #708FA3;
 }
 
 #square5 {
 	border-bottom: 5px solid black;
-	width: 32%;
-	height: 100px;
-	float: left;
 	background-color: #486F88;
 }
 
 #square6 {
 	border-right: 5px solid black;
-	width: 32%;
-	height: 100px;
-	float: left;
 	background-color: #123852;
 }
 
 #square7 {
 	border-right: 5px solid black;
-	width: 32%;
-	height: 100px;
-	float: left;
 	background-color: #032236;
 }
 
 #square8 {
-	width:32%;
-	height: 100px;
-	float: left;
 	background-color: #708FA3;
 }
 /*

@@ -13,15 +13,15 @@
 		</div>
 
 		<div id="board"> 
-			<div id="square0" class = "square" onclick="userPick(0)"></div>
-			<div id="square1" class = "square" onclick="userPick(1)"></div>
-			<div id="square2" class = "square" onclick="userPick(2)"></div>
-			<div id="square3" class = "square" onclick="userPick(3)"></div>
-			<div id="square4" class = "square" onclick="userPick(4)"></div>
-			<div id="square5" class = "square" onclick="userPick(5)"></div>
-			<div id="square6" class = "square" onclick="userPick(6)"></div>
-			<div id="square7" class = "square" onclick="userPick(7)"></div>
-			<div id="square8" class = "square" onclick="userPick(8)"></div>
+			<div id="square0" class = "square"></div>
+			<div id="square1" class = "square"></div>
+			<div id="square2" class = "square"></div>
+			<div id="square3" class = "square"></div>
+			<div id="square4" class = "square"></div>
+			<div id="square5" class = "square"></div>
+			<div id="square6" class = "square"></div>
+			<div id="square7" class = "square"></div>
+			<div id="square8" class = "square"></div>
 		</div>
 	</div>
 
@@ -30,35 +30,62 @@
 
 <script type="text/javascript">
 	
-		var winningCombo = [
-			[0, 1, 2],
-			[3, 4, 5],
-			[6, 7, 8],
-			[0, 3, 6],
-			[1, 4, 7],
-			[2, 5, 8],
-			[2, 4, 6],
-		];
+	var winningCombo = [
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8],
+		[2, 4, 6],
+		[0, 4, 8],
+	];
 
-		function userPick(number) {
-			console.log(number);
+	var playerX = [];
+	var playerO = [];
 
-			//function squareRename() {
-				//square = document.getElementById('square' + number.toString());
+	var counter = 0;
 
-			//};
+	var squares = document.getElementsByClassName("square"); //Pulls down all squares
+	for (var i = 0; i<squares.length; i++){ 
+		var square = squares[i]; //identifies each unique square as it passes through the loop
+		square.addEventListener('click', makeHandler(i));  //when there is a click, runs makeHandler function to ensure the clicked number is pushed into the player's array
+		if (playerO == winningCombo) {
+			alert("Player 0 has won!");
+		}
+		else if(playerX == winningCombo){
+			alert("Player X has won!")
+		}
+	}
+	
 
-			/*var board = document.getElementById("board");
-			for (var i = 0; i < 9; ++i){
-				if (number == i){
-					newDiv = document.getElementbyClass("square");
-					newDiv.addEventListener("mouseenter", function(){
-					square.style.backgroundColor = "grey";
-					}		
-
-				}
+	function makeHandler(num){
+		return function() {
+			if (counter % 2 == 0) {
+				this.innerHTML = "X";
+				playerX.push(num);
 			}
-		}	
+			else {
+				this.innerHTML = "O";
+				playerO.push(num);	
+			}
+			counter += 1;
+		};
+	}
+
+
+
+			//var board = document.getElementById("board");
+			// for (var i = 0; i < 9; ++i){
+				// if (number == i){
+					// newDiv = document.getElementByClass("square");
+					// newDiv.addEventListener("mouseenter", function(){
+					// square.style.backgroundColor = "grey";
+					// }		
+
+				// }
+			// }
+		// }	
 	
 		// var newDiv = document.getElementById("square0");
 		// newDiv.addEventListener("mouseleave", function(){
@@ -98,7 +125,7 @@
 			// newDiv.className = "leftSide";
 		// }
 
-	// }
+
 		
 
 </script>
