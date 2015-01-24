@@ -4,12 +4,13 @@
 	<title>Tic Tac Toe</title>
 	<<link rel="stylesheet" type="text/css" href="normalize.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="animate.css">
 </head>
 
 <body>
 	<div class="container">
 		<div class="column">
-			<p>Tic Tac Toe</p>
+			<p>Instructor Tic Tac Toe</p>
 		</div>
 
 		<div id="board"> 
@@ -25,8 +26,8 @@
 		</div>
 
 		<div class="players">
-		<span class= "playerOne">Player One</span>
-		<span class="playerTwo">Player Two</span>
+		<span class= "playerOne">Player Blaise</span>
+		<span class="playerTwo">Player Zach</span>
 		</div>
 	</div>
 
@@ -63,6 +64,7 @@
 	function makeHandler(num){
 		return function() {
 			if (counter % 2 == 0 && this.innerHTML !== "X" && this.innerHTML !== "O") {
+					this.classList.add("xImage", "animated", "flash"); //Adds class with image to div
 					this.innerHTML = "X";
 					//gameBoard.push("X");
 					//Splice pushes X into gameboard array at specific position (num) and removes an empty space
@@ -72,6 +74,7 @@
 					console.log(counter)
 				}
 			else if (this.innerHTML !== "X" && this.innerHTML !== "O") {
+					this.classList.add("oImage", "animated", "lightSpeedIn"); //Adds class with image to div
 					this.innerHTML = "O";
 					//gameBoard.push("O");
 					//Splice pushes O into gameboard array at specific position (num) and removes an empty space
@@ -94,7 +97,7 @@
 			(gameBoard[2] == "X" && gameBoard[4] == "X" && gameBoard[6] == "X") ||
 			(gameBoard[0] == "X" && gameBoard[4] == "X" && gameBoard[8] == "X"))
 		{
-			alert("Player X wins");
+			alert("Player Blaise wins");
 		}
 		else if ((gameBoard[0] == "O" && gameBoard[1] == "O" && gameBoard[2] == "O") ||
 			(gameBoard[3] == "O" && gameBoard[4] == "O" && gameBoard[5] == "O") || 
@@ -105,7 +108,7 @@
 			(gameBoard[2] == "O" && gameBoard[4] == "O" && gameBoard[6] == "O") ||
 			(gameBoard[0] == "O" && gameBoard[4] == "O" && gameBoard[8] == "O"))
 		{
-			alert("Player O wins");
+			alert("Player Zach wins");
 		}
 		else if (counter == 8) {
 			alert("Looks like a tie!");
@@ -117,7 +120,6 @@
 
 		//can use boolean variables for alternating
 
-		//create a css class like X and O and in that class define a background image. in the click handler - add that class to the element. this.classlist, etc.
 
 	
 

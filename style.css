@@ -16,6 +16,7 @@
 	width: 67.5%;
 	margin: 0 auto;
 	text-align: center;
+	font-size: 25px;
 }
 
 #board {
@@ -33,9 +34,10 @@
 	width: 32%;
 	height: 100px;
 	float: left;
-	font-size: 80px;
+	font-size: 0px;
 	text-align: center;
 	color: white;
+	border-radius: 10px;
 }
 
 .square0 {
@@ -97,6 +99,18 @@
 
 .playerTwo{
 	float: left;
+}
+
+.xImage {
+	background: url("images/Blaise.png") no-repeat center;
+	background-size: 80%;
+	background-color: #546EE6;
+}
+
+.oImage {
+	background: url("images/Zach.png") no-repeat center;
+	background-size: 80%;
+	background-color: #A78C7F;
 }
 /*
 div#board > div {
