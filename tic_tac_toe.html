@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
 		<div class="column">
-			<p>Instructor Tic Tac Toe</p>
+			<p>Best Friends Tic Tac Toe</p>
 		</div>
 
 		<div id="board"> 
@@ -27,7 +27,12 @@
 
 		<div class="players">
 		<span class= "playerOne">Player Blaise</span>
+		<span class="turn"></span>
 		<span class="playerTwo">Player Zach</span>
+		</div>
+		<div class ="winner">
+			<p class="blaise hidden">Blaise wins!</p>
+			<p class="zach hidden">Zach wins!</p>
 		</div>
 	</div>
 
@@ -47,7 +52,7 @@
 		[0, 4, 8],
 	];
 
-	var gameBoard = ['','','','','','','','',''];
+	var myBoard = ['','','','','','','','',''];
 	
 	var counter = 0;
 
@@ -55,60 +60,60 @@
 	for (var i = 0; i<squares.length; i++){ 
 		var square = squares[i]; //identifies each unique square as it passes through the loop
 
-		square.addEventListener('click', makeHandler(i));  //Activates function MakeHandler when a square is clicked
+		square.addEventListener('click', runGame(i));  //Activates function runGame when a square is clicked
 	}
 
-
-
 	// Pushes each square number into respective player's array 
-	function makeHandler(num){
+	function runGame(num){
 		return function() {
 			if (counter % 2 == 0 && this.innerHTML !== "X" && this.innerHTML !== "O") {
 					this.classList.add("xImage", "animated", "flash"); //Adds class with image to div
 					this.innerHTML = "X";
-					//gameBoard.push("X");
-					//Splice pushes X into gameboard array at specific position (num) and removes an empty space
-					gameBoard.splice(num, 1, "X");
+					//myBoard.push("X");
+					//Splice pushes X into myBoard array at specific position (num) and removes an empty space
+					myBoard.splice(num, 1, "X");
 					checkWin();
 					counter += 1;
-					console.log(counter)
+					console.log(myBoard)
 				}
 			else if (this.innerHTML !== "X" && this.innerHTML !== "O") {
 					this.classList.add("oImage", "animated", "lightSpeedIn"); //Adds class with image to div
 					this.innerHTML = "O";
-					//gameBoard.push("O");
-					//Splice pushes O into gameboard array at specific position (num) and removes an empty space
-					gameBoard.splice(num, 1, "O");	
+					//myBoard.push("O");
+					//Splice pushes O into myBoard array at specific position (num) and removes an empty space
+					myBoard.splice(num, 1, "O");	
 					checkWin();
 					counter += 1;
-					console.log(counter)
+					console.log(myBoard)
 				}
 			
 		}
 	}
 
 	function checkWin(){
-		if ((gameBoard[0] == "X" && gameBoard[1] == "X" && gameBoard[2] == "X") ||
-			(gameBoard[3] == "X" && gameBoard[4] == "X" && gameBoard[5] == "X") || 
-			(gameBoard[6] == "X" && gameBoard[7] == "X" && gameBoard[8] == "X") || 
-			(gameBoard[0] == "X" && gameBoard[3] == "X" && gameBoard[6] == "X") || 
-			(gameBoard[1] == "X" && gameBoard[4] == "X" && gameBoard[7] == "X") || 
-			(gameBoard[2] == "X" && gameBoard[5] == "X" && gameBoard[8] == "X") || 
-			(gameBoard[2] == "X" && gameBoard[4] == "X" && gameBoard[6] == "X") ||
-			(gameBoard[0] == "X" && gameBoard[4] == "X" && gameBoard[8] == "X"))
+		if ((myBoard[0] == "X" && myBoard[1] == "X" && myBoard[2] == "X") ||
+			(myBoard[3] == "X" && myBoard[4] == "X" && myBoard[5] == "X") || 
+			(myBoard[6] == "X" && myBoard[7] == "X" && myBoard[8] == "X") || 
+			(myBoard[0] == "X" && myBoard[3] == "X" && myBoard[6] == "X") || 
+			(myBoard[1] == "X" && myBoard[4] == "X" && myBoard[7] == "X") || 
+			(myBoard[2] == "X" && myBoard[5] == "X" && myBoard[8] == "X") || 
+			(myBoard[2] == "X" && myBoard[4] == "X" && myBoard[6] == "X") ||
+			(myBoard[0] == "X" && myBoard[4] == "X" && myBoard[8] == "X"))
 		{
-			alert("Player Blaise wins");
+			// var b = document.getElementsByClassName('blaise');
+				// b.className = b.className.replace('hidden', '');
+			alert("Blaise won!");
 		}
-		else if ((gameBoard[0] == "O" && gameBoard[1] == "O" && gameBoard[2] == "O") ||
-			(gameBoard[3] == "O" && gameBoard[4] == "O" && gameBoard[5] == "O") || 
-			(gameBoard[6] == "O" && gameBoard[7] == "O" && gameBoard[8] == "O") || 
-			(gameBoard[0] == "O" && gameBoard[3] == "O" && gameBoard[6] == "O") || 
-			(gameBoard[1] == "O" && gameBoard[4] == "O" && gameBoard[7] == "O") || 
-			(gameBoard[2] == "O" && gameBoard[5] == "O" && gameBoard[8] == "O") || 
-			(gameBoard[2] == "O" && gameBoard[4] == "O" && gameBoard[6] == "O") ||
-			(gameBoard[0] == "O" && gameBoard[4] == "O" && gameBoard[8] == "O"))
+		else if ((myBoard[0] == "O" && myBoard[1] == "O" && myBoard[2] == "O") ||
+			(myBoard[3] == "O" && myBoard[4] == "O" && myBoard[5] == "O") || 
+			(myBoard[6] == "O" && myBoard[7] == "O" && myBoard[8] == "O") || 
+			(myBoard[0] == "O" && myBoard[3] == "O" && myBoard[6] == "O") || 
+			(myBoard[1] == "O" && myBoard[4] == "O" && myBoard[7] == "O") || 
+			(myBoard[2] == "O" && myBoard[5] == "O" && myBoard[8] == "O") || 
+			(myBoard[2] == "O" && myBoard[4] == "O" && myBoard[6] == "O") ||
+			(myBoard[0] == "O" && myBoard[4] == "O" && myBoard[8] == "O"))
 		{
-			alert("Player Zach wins");
+			document.getElementsByClassName('zach').classList.add("zachWinner");
 		}
 		else if (counter == 8) {
 			alert("Looks like a tie!");
