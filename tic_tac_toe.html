@@ -2,37 +2,36 @@
 <html>
 <head>
 	<title>Tic Tac Toe</title>
-	<<link rel="stylesheet" type="text/css" href="normalize.css">
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" type="text/css" href="animate.css">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<script src="js/angular.min.js"></script>
+	<script src="js/tictactoeangular.js"></script>
 </head>
 
-<body>
+<body ng-app="ticApp" ng-controller="ticCtrl">
 	<div class="container">
 		<div class="column">
-			<p>Best Friends Tic Tac Toe</p>
+			<h3>Best Friends Tic Tac Toe</h3>
 		</div>
-
-		<div id="board"> 
-			<div class="square0 square"></div>
-			<div class="square1 square"></div>
-			<div class="square2 square"></div>
-			<div class="square3 square"></div>
-			<div class="square4 square"></div>
-			<div class="square5 square"></div>
-			<div class="square6 square"></div>
-			<div class="square7 square"></div>
-			<div class="square8 square"></div>
-		</div>
-
+		
 		<div class="players">
-		<span class= "playerOne">Player Blaise</span>
-		<span class="turn"></span>
-		<span class="playerTwo">Player Zach</span>
+			<span class= "playerOne">Player Blaise</span>
+			<span class="turn"></span>
+			<span class="playerTwo">Player Zach</span>
 		</div>
+
+		<div id="board">
+			<div class = "cells" ng-class="{xPlayer: cell=='X', oPlayer: cell=='O'}" ng-repeat="cell in board track by $index" ng-click="runGame($index)"> 
+			<!-- ng-class sets the background images, ng-repeat is repeating the div for the cell, if a cell is clicked ng-click runs the runGame function -->
+			{{cell == "" ? "&nbsp;" : cell}}  
+			<!-- If cell is blank, then make no blank spaces. If false, put in cell value -->
+			</div>
+		</div>
+
 		<div class ="winner">
-			<p class="blaise hidden">Blaise wins!</p>
-			<p class="zach hidden">Zach wins!</p>
+			<p ng-show="blaiseWins">Blaise wins!</p>
+			<p ng-show="zachWins">Zach wins!</p>
 		</div>
 	</div>
 
@@ -41,147 +40,11 @@
 
 <script type="text/javascript">
 	
-	var winningCombo = [
-		[0, 1, 2],
-		[3, 4, 5],
-		[6, 7, 8],
-		[0, 3, 6],
-		[1, 4, 7],
-		[2, 5, 8],
-		[2, 4, 6],
-		[0, 4, 8],
-	];
-
-	var myBoard = ['','','','','','','','',''];
-	
-	var counter = 0;
-
-	var squares = document.getElementsByClassName("square"); //Pulls down all squares
-	for (var i = 0; i<squares.length; i++){ 
-		var square = squares[i]; //identifies each unique square as it passes through the loop
-
-		square.addEventListener('click', runGame(i));  //Activates function runGame when a square is clicked
-	}
-
-	// Pushes each square number into respective player's array 
-	function runGame(num){
-		return function() {
-			if (counter % 2 == 0 && this.innerHTML !== "X" && this.innerHTML !== "O") {
-					this.classList.add("xImage", "animated", "flash"); //Adds class with image to div
-					this.innerHTML = "X";
-					//myBoard.push("X");
-					//Splice pushes X into myBoard array at specific position (num) and removes an empty space
-					myBoard.splice(num, 1, "X");
-					checkWin();
-					counter += 1;
-					console.log(myBoard)
-				}
-			else if (this.innerHTML !== "X" && this.innerHTML !== "O") {
-					this.classList.add("oImage", "animated", "lightSpeedIn"); //Adds class with image to div
-					this.innerHTML = "O";
-					//myBoard.push("O");
-					//Splice pushes O into myBoard array at specific position (num) and removes an empty space
-					myBoard.splice(num, 1, "O");	
-					checkWin();
-					counter += 1;
-					console.log(myBoard)
-				}
-			
-		}
-	}
-
-	function checkWin(){
-		if ((myBoard[0] == "X" && myBoard[1] == "X" && myBoard[2] == "X") ||
-			(myBoard[3] == "X" && myBoard[4] == "X" && myBoard[5] == "X") || 
-			(myBoard[6] == "X" && myBoard[7] == "X" && myBoard[8] == "X") || 
-			(myBoard[0] == "X" && myBoard[3] == "X" && myBoard[6] == "X") || 
-			(myBoard[1] == "X" && myBoard[4] == "X" && myBoard[7] == "X") || 
-			(myBoard[2] == "X" && myBoard[5] == "X" && myBoard[8] == "X") || 
-			(myBoard[2] == "X" && myBoard[4] == "X" && myBoard[6] == "X") ||
-			(myBoard[0] == "X" && myBoard[4] == "X" && myBoard[8] == "X"))
-		{
-			// var b = document.getElementsByClassName('blaise');
-				// b.className = b.className.replace('hidden', '');
-			alert("Blaise won!");
-		}
-		else if ((myBoard[0] == "O" && myBoard[1] == "O" && myBoard[2] == "O") ||
-			(myBoard[3] == "O" && myBoard[4] == "O" && myBoard[5] == "O") || 
-			(myBoard[6] == "O" && myBoard[7] == "O" && myBoard[8] == "O") || 
-			(myBoard[0] == "O" && myBoard[3] == "O" && myBoard[6] == "O") || 
-			(myBoard[1] == "O" && myBoard[4] == "O" && myBoard[7] == "O") || 
-			(myBoard[2] == "O" && myBoard[5] == "O" && myBoard[8] == "O") || 
-			(myBoard[2] == "O" && myBoard[4] == "O" && myBoard[6] == "O") ||
-			(myBoard[0] == "O" && myBoard[4] == "O" && myBoard[8] == "O"))
-		{
-			document.getElementsByClassName('zach').classList.add("zachWinner");
-		}
-		else if (counter == 8) {
-			alert("Looks like a tie!");
-		}
-
-	}
 
 		//Look at way using modulus operator or using a loop with variable i and each time you iterate i is the first array
 
 		//can use boolean variables for alternating
 
-
-	
-
-
-
-			//var board = document.getElementById("board");
-			// for (var i = 0; i < 9; ++i){
-				// if (number == i){
-					// newDiv = document.getElementByClass("square");
-					// newDiv.addEventListener("mouseenter", function(){
-					// square.style.backgroundColor = "grey";
-					// }		
-
-				// }
-			// }
-		// }	
-	
-		// var newDiv = document.getElementById("square0");
-		// newDiv.addEventListener("mouseleave", function(){
-			// this.style.backgroundColor = null;
-		// });
-		
-		// if (i >= 3){
-			// newDiv.className = "topSide";
-		// }
-		// if (i % 3 != 0){
-			// newDiv.className = "leftSide";
-		// }
-
-
-
-
-
-
-
-
-
-	// var board = document.getElementById("board");
-	// for (var i = 0; i < 9; ++i){
-		// var newDiv = document.createElement("div");
-		// board.appendChild(newDiv);
-		// newDiv.innerHTML = i;
-		// newDiv.addEventListener("mouseenter", function(){
-			// this.style.backgroundColor = "grey";
-		// });
-		// newDiv.addEventListener("mouseleave", function(){
-			// this.style.backgroundColor = null;
-		// });
-		// if (i >= 3){
-			// newDiv.className = "topSide";
-		// }
-		// if (i % 3 != 0){
-			// newDiv.className = "leftSide";
-		// }
-
-
-		
 
 </script>
 </body>

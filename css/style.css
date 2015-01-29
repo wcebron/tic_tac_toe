@@ -1,0 +1,93 @@
+*, * {
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+html {
+	background: url('../images/Best_Friends.jpg') no-repeat center center fixed;
+}
+
+.container{
+	margin: 0 auto;
+	width: 90%;
+	max-width: 48rem;
+	position: relative;
+	color: white;
+}
+
+.column{
+	padding: 1%;
+	width: 67.5%;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 25px;
+}
+
+#board {
+	width: 67.5%;
+	padding: 1%;
+	margin: 0 auto;
+	height: 360px;
+}
+
+.cells { 
+	width: 32%	;
+	height: 120px;
+    border: 2px solid #4B1561;
+   	display: inline-block;
+   	font-size: 0em;
+}
+
+.players{
+	width: 20%;
+	margin-left: -25%;
+}
+
+.playerOne{
+	width: 100%;
+	float: left;
+}
+
+.playerTwo{
+	width: 100%;
+	float: left;
+}
+
+.xPlayer {
+	background: url("../images/Blaise.png") no-repeat center;
+	background-size: 80%;
+}
+
+.cells:hover {
+	background-color: #5A3C69;
+}
+
+.oPlayer {
+	background: url("../images/Zach.png") no-repeat center;
+	background-size: 80%;
+}
+
+.winner{
+	font-size: 25px;
+	margin: 0 40%;
+}
+
+/*.hidden{
+	visibility: hidden;
+}*/
+
+/*
+div#board > div {
+	width: 32%;
+	height: 190px;
+	display: inline-block;
+	margin: .35%;
+}
+
+/*
+.leftSide {
+	border-left: 3px solid black;
+}
+
+.topSide {
+	border-top: 3px solid orange;
+}*/
