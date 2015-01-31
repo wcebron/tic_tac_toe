@@ -15,12 +15,6 @@ app.controller('ticCtrl', function($scope, $firebase){
    	var counterSync = $firebase(counterRef);  //creates a synchronized object for counter
     $scope.counter = counterSync.$asArray(); //creates an array for the counter data
 
-		var victorRef = ref.child('victor');
-		var victorSync = $firebase(victorRef);
-		$scope.victor = sync.$asObject()
-		$scope.victor.checkWinner = false;
-		$scope.victor.$save();
-
 	$scope.board.$loaded(function(){
   		if ($scope.board.length === 0){
   			for(var i = 0; i < 9; i++){
@@ -46,6 +40,12 @@ app.controller('ticCtrl', function($scope, $firebase){
   		}
   	});
 
+		// var victorRef = ref.child('victor');  //Unneccesary object that I removed.
+		// var victorSync = $firebase(victorRef);
+		// $scope.victor = sync.$asObject()
+		// $scope.victor.checkWinner = false;
+		// $scope.victor.$save();
+
 
 	// $scope.board = ['','','','','','','','',''];
 
@@ -64,6 +64,11 @@ app.controller('ticCtrl', function($scope, $firebase){
 
 	$scope.runGame = function(index){
 
+		if($scope.zachWins === true || $scope.blaiseWins === true){
+			console.log("Is this running?")
+			return false;  //stops game in its tracks because there is a winner
+		}
+
 		if(($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O") && ($scope.counter[0].move % 2 == 0)){
 		$scope.board[index].marker = "X" //adds x to the board in firebase (won't work with above)
 		$scope.board.$save(index);
@@ -78,13 +83,7 @@ app.controller('ticCtrl', function($scope, $firebase){
 		$scope.counter[0].move++;
 		$scope.counter.$save(0);
 		$scope.checkWin();
-		// console.log($scope.board[index]);
 		}
-
-		// else if($scope.victor.checkWinner === true){
-		// 	console.log("Is this running?")
-		// 	return false;  //stops game in its tracks because there is a winner
-		// }
 
 	};
 
@@ -98,11 +97,7 @@ app.controller('ticCtrl', function($scope, $firebase){
 			($scope.board[2].marker == "X" && $scope.board[4].marker == "X" && $scope.board[6].marker == "X") ||
 			($scope.board[0].marker == "X" && $scope.board[4].marker == "X" && $scope.board[8].marker == "X"))
 		{
-			console.log($scope.victor);
 			$scope.blaiseWins = true;
-			$scope.victor.checkWinner = true;
-			$scope.victor.$save();
-			console.log($scope.victor);
 
 		}
 		else if (($scope.board[0].marker == "O" && $scope.board[1].marker == "O" && $scope.board[2].marker == "O") ||
@@ -115,8 +110,6 @@ app.controller('ticCtrl', function($scope, $firebase){
 			($scope.board[0].marker == "O" && $scope.board[4].marker == "O" && $scope.board[8].marker == "O"))
 		{
 			$scope.zachWins = true;
-			$scope.victor.checkWinner = true;
-			$scope.victor.$save();
 		}
 		else if ($scope.counter[0].move == 9) {
 			$scope.tie = true;
