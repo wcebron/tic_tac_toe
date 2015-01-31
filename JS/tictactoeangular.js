@@ -24,7 +24,7 @@ app.controller('ticCtrl', function($scope, $firebase){
 	$scope.board.$loaded(function(){
   		if ($scope.board.length === 0){
   			for(var i = 0; i < 9; i++){
-  				$scope.board.$add({marker: ""}); //creates board wiht nine tiles because it doesn't exist
+  				$scope.board.$add({marker: ""}); //creates board with nine tiles because it doesn't exist
   			}
   		}
   		else{
@@ -40,8 +40,8 @@ app.controller('ticCtrl', function($scope, $firebase){
   			$scope.counter.$add({move: 0}); //creates counter in Firebase with a move key and value of zero
   		}
   		else{
-  			$scope.counter[0].move = 0; //if counter exists, set it move node to zero locally
-  			$scope.counter.$save(0); //then save the
+  			$scope.counter[0].move = 0; //if counter exists, set the move node to zero locally
+  			$scope.counter.$save(0); //then save the move node into firebase
 
   		}
   	});
@@ -64,27 +64,28 @@ app.controller('ticCtrl', function($scope, $firebase){
 
 	$scope.runGame = function(index){
 
-		if($scope.victor.checkWinner === true){
-			return false;
-		}
-
 		if(($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O") && ($scope.counter[0].move % 2 == 0)){
 		$scope.board[index].marker = "X" //adds x to the board in firebase (won't work with above)
 		$scope.board.$save(index);
-		$scope.checkWin(); //runs win condition function
 		$scope.counter[0].move++; //increments counter by one
-		$scope.counter.$save(0);
-		// console.log($scope.board[index]);
+		$scope.counter.$save(0); //saves state of counter to firebase
+		$scope.checkWin(); //runs win condition function
 		}
 
 		else if (($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O")){
 		$scope.board[index].marker = "O";
 		$scope.board.$save($scope.board[index]);
-		$scope.checkWin();
 		$scope.counter[0].move++;
 		$scope.counter.$save(0);
+		$scope.checkWin();
 		// console.log($scope.board[index]);
 		}
+
+		// else if($scope.victor.checkWinner === true){
+		// 	console.log("Is this running?")
+		// 	return false;  //stops game in its tracks because there is a winner
+		// }
+
 	};
 
 	$scope.checkWin = function(){
@@ -97,9 +98,11 @@ app.controller('ticCtrl', function($scope, $firebase){
 			($scope.board[2].marker == "X" && $scope.board[4].marker == "X" && $scope.board[6].marker == "X") ||
 			($scope.board[0].marker == "X" && $scope.board[4].marker == "X" && $scope.board[8].marker == "X"))
 		{
+			console.log($scope.victor);
 			$scope.blaiseWins = true;
 			$scope.victor.checkWinner = true;
 			$scope.victor.$save();
+			console.log($scope.victor);
 
 		}
 		else if (($scope.board[0].marker == "O" && $scope.board[1].marker == "O" && $scope.board[2].marker == "O") ||
@@ -115,8 +118,8 @@ app.controller('ticCtrl', function($scope, $firebase){
 			$scope.victor.checkWinner = true;
 			$scope.victor.$save();
 		}
-		else if ($scope.counter == 8) {
-			alert("Looks like a tie!");
+		else if ($scope.counter[0].move == 9) {
+			$scope.tie = true;
 		}
 
 	};
