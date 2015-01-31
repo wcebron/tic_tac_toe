@@ -29,7 +29,7 @@ html {
 	height: 360px;
 }
 
-.cells { 
+.cells {
 	width: 32%	;
 	height: 120px;
     border: 2px solid #4B1561;
@@ -69,6 +69,7 @@ html {
 .winner{
 	font-size: 25px;
 	margin: 0 40%;
+	width: 50%;
 }
 
 /*.hidden{

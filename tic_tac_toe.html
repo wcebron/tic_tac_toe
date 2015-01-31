@@ -5,7 +5,13 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<!-- AngularJS -->
 	<script src="js/angular.min.js"></script>
+	<!-- Firebase -->
+	<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+	<!-- AngularFire -->
+	<script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
+
 	<script src="js/tictactoeangular.js"></script>
 </head>
 
@@ -14,7 +20,11 @@
 		<div class="column">
 			<h3>Best Friends Tic Tac Toe</h3>
 		</div>
-		
+		<div class ="winner">
+			<p ng-show="blaiseWins">Blaise wins!</p>
+			<p ng-show="zachWins">Zach wins!</p>
+		</div>
+
 		<div class="players">
 			<span class= "playerOne">Player Blaise</span>
 			<span class="turn"></span>
@@ -22,16 +32,11 @@
 		</div>
 
 		<div id="board">
-			<div class = "cells" ng-class="{xPlayer: cell=='X', oPlayer: cell=='O'}" ng-repeat="cell in board track by $index" ng-click="runGame($index)"> 
+			<div class = "cells" ng-class="{xPlayer: cell.marker=='X', oPlayer: cell.marker=='O'}" ng-repeat="cell in board track by $index" ng-click="runGame($index)">
 			<!-- ng-class sets the background images, ng-repeat is repeating the div for the cell, if a cell is clicked ng-click runs the runGame function -->
-			{{cell == "" ? "&nbsp;" : cell}}  
+			{{cell == "" ? "&nbsp;" : cell}}
 			<!-- If cell is blank, then make no blank spaces. If false, put in cell value -->
 			</div>
-		</div>
-
-		<div class ="winner">
-			<p ng-show="blaiseWins">Blaise wins!</p>
-			<p ng-show="zachWins">Zach wins!</p>
 		</div>
 	</div>
 
@@ -39,7 +44,7 @@
 
 
 <script type="text/javascript">
-	
+
 
 		//Look at way using modulus operator or using a loop with variable i and each time you iterate i is the first array
 
