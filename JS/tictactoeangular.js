@@ -1,6 +1,6 @@
-var app = angular.module('ticApp', ["firebase"]);
+var ticApp = angular.module('ticApp', ["firebase"]);
 
-app.controller('ticCtrl', function($scope, $firebase){
+ticApp.controller('ticCtrl', function($scope, $firebase){
 	var ref = new Firebase("https://tictactoeangular.firebaseio.com/");
     // creates an AngularFire reference to the data
     var sync = $firebase(ref);
