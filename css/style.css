@@ -24,7 +24,7 @@ html {
 
 #board {
 	width: 67.5%;
-	padding: 1%;
+	padding: 0;
 	margin: 0 auto;
 	height: 360px;
 }
@@ -32,9 +32,10 @@ html {
 .cells {
 	width: 32%	;
 	height: 120px;
-    border: 2px solid #4B1561;
-   	display: inline-block;
-   	font-size: 0em;
+  border: 2px solid #4B1561;
+  display: inline-block;
+  font-size: 0em;
+	margin: 0;
 }
 
 .players{
