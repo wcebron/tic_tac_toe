@@ -15,6 +15,8 @@ app.controller('ticCtrl', function($scope, $firebase){
    	var counterSync = $firebase(counterRef);  //creates a synchronized object for counter
     $scope.counter = counterSync.$asArray(); //creates an array for the counter data
 
+
+		//Shoutout to Sam and Wendy for helping me understand the logic around creating the board
 	$scope.board.$loaded(function(){
   		if ($scope.board.length === 0){
   			for(var i = 0; i < 9; i++){
@@ -39,6 +41,8 @@ app.controller('ticCtrl', function($scope, $firebase){
 
   		}
   	});
+
+		$scope.blaiseTurn = true;
 
 		// var victorRef = ref.child('victor');  //Unneccesary object that I removed.
 		// var victorSync = $firebase(victorRef);
@@ -66,6 +70,8 @@ app.controller('ticCtrl', function($scope, $firebase){
 
 		if($scope.zachWins === true || $scope.blaiseWins === true){
 			console.log("Is this running?")
+			$scope.blaiseTurn = false;
+			$scope.zachTurn = false;
 			return false;  //stops game in its tracks because there is a winner
 		}
 
@@ -74,6 +80,8 @@ app.controller('ticCtrl', function($scope, $firebase){
 		$scope.board.$save(index);
 		$scope.counter[0].move++; //increments counter by one
 		$scope.counter.$save(0); //saves state of counter to firebase
+		$scope.blaiseTurn = false;
+		$scope.zachTurn = true;
 		$scope.checkWin(); //runs win condition function
 		}
 
@@ -82,6 +90,8 @@ app.controller('ticCtrl', function($scope, $firebase){
 		$scope.board.$save($scope.board[index]);
 		$scope.counter[0].move++;
 		$scope.counter.$save(0);
+		$scope.zachTurn = false;
+		$scope.blaiseTurn = true;
 		$scope.checkWin();
 		}
 
@@ -98,6 +108,7 @@ app.controller('ticCtrl', function($scope, $firebase){
 			($scope.board[0].marker == "X" && $scope.board[4].marker == "X" && $scope.board[8].marker == "X"))
 		{
 			$scope.blaiseWins = true;
+			$scope.zachTurn = false;
 
 		}
 		else if (($scope.board[0].marker == "O" && $scope.board[1].marker == "O" && $scope.board[2].marker == "O") ||
@@ -110,9 +121,11 @@ app.controller('ticCtrl', function($scope, $firebase){
 			($scope.board[0].marker == "O" && $scope.board[4].marker == "O" && $scope.board[8].marker == "O"))
 		{
 			$scope.zachWins = true;
+			$scope.blaiseTurn = false;
 		}
 		else if ($scope.counter[0].move == 9) {
 			$scope.tie = true;
+			$scope.zachTurn = false;
 		}
 
 	};

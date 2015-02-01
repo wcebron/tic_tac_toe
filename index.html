@@ -5,12 +5,15 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
-	<!-- AngularJS -->
-	<script src="js/angular.min.js"></script>
-	<!-- Firebase -->
-	<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
-	<!-- AngularFire -->
-	<script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
+
+		<!--Angular-->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+		<!-- Firebase -->
+		<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+		<!-- AngularFire -->
+		<script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
+		<!-- NG Route -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.js"></script>
 
 	<script src="js/tictactoeangular.js"></script>
 </head>
@@ -28,9 +31,9 @@
 
 		<div class="players">
 			<h3>Game Center</h3>
-			<span class= "playerOne">Player Blaise: </span>
+			<span class= "playerOne">Player Blaise: <span ng-show="blaiseTurn">&#x2190 Your Move</span></span>
 			<span class="turn"></span>
-			<span class="playerTwo">Player Zach</span>
+			<span class="playerTwo">Player Zach: <span ng-show="zachTurn">&#x2190 Your Move</span> </span>
 		</div>
 
 		<div id="board">
