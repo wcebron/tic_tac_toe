@@ -15,6 +15,9 @@ ticApp.controller('ticCtrl', function($scope, $firebase){
    	var counterSync = $firebase(counterRef);  //creates a synchronized object for counter
     $scope.counter = counterSync.$asArray(); //creates an array for the counter data
 
+    var turnsRef = ref.child('turns'); //creates a child ref for the turn in firebase
+   	var turnsSync = $firebase(turnsRef);  //creates a synchronized object for turn
+    $scope.turns= turnsSync.$asArray(); //creates an array for the turn data
 
 		//Shoutout to Sam and Wendy for helping me understand the logic around creating the board
 	$scope.board.$loaded(function(){
@@ -37,23 +40,24 @@ ticApp.controller('ticCtrl', function($scope, $firebase){
   		}
   		else{
   			$scope.counter[0].move = 0; //if counter exists, set the move node to zero locally
-  			$scope.counter.$save(0); //then save the move node into firebase
+  			$scope.counter.$save(0); //then save the move node (0 spot in the array) into firebase
 
   		}
   	});
 
-		$scope.blaiseTurn = true;
+	$scope.blaiseTurn = true;  //Sets blaiseTurn to true to start
 
-		// var victorRef = ref.child('victor');  //Unneccesary object that I removed.
-		// var victorSync = $firebase(victorRef);
-		// $scope.victor = sync.$asObject()
-		// $scope.victor.checkWinner = false;
-		// $scope.victor.$save();
+	$scope.turns.$loaded(function(){
+		if($scope.turns.length === 0){  
+			$scope.turns.$add({player1: false}); //if turns doesn't exist, create a node with a player 1 key and a value of false
+		}
+		else{
+			$scope.turns[0].player1 = false; //if turns exists, when reloaded, set player 1 to false
+			$scope.turns.$save(0); //save the first item in turns to firebase (in this case player 1 as false)
+		}
+	})
 
 
-	// $scope.board = ['','','','','','','','',''];
-
-	// $scope.counter = 0;
 
 	// $scope.winningCombo = [
 	// 	[0, 1, 2],
@@ -69,29 +73,34 @@ ticApp.controller('ticCtrl', function($scope, $firebase){
 	$scope.runGame = function(index){
 
 		if($scope.zachWins === true || $scope.blaiseWins === true){
-			console.log("Is this running?")
+			//console.log("Is this running?")
 			$scope.blaiseTurn = false;
 			$scope.zachTurn = false;
 			return false;  //stops game in its tracks because there is a winner
 		}
 
-		if(($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O") && ($scope.counter[0].move % 2 == 0)){
+		if($scope.counter[0].move === 0){
+			$scope.turns[0].player1 = true; //set player1 to true locally.  This makes only the first mover player1.
+			//console.log("What is player one set to" + $scope.turns[0].player1);
+		}
+
+		if(($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O") && ($scope.counter[0].move % 2 == 0) && ($scope.turns[0].player1)){
 		$scope.board[index].marker = "X" //adds x to the board in firebase (won't work with above)
 		$scope.board.$save(index);
 		$scope.counter[0].move++; //increments counter by one
 		$scope.counter.$save(0); //saves state of counter to firebase
-		$scope.blaiseTurn = false;
+		$scope.blaiseTurn = false;	
 		$scope.zachTurn = true;
 		$scope.checkWin(); //runs win condition function
 		}
 
-		else if (($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O")){
+		else if (($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O") && ($scope.counter[0].move % 2 == 1) && (!$scope.turns[0].player1)){
 		$scope.board[index].marker = "O";
 		$scope.board.$save($scope.board[index]);
 		$scope.counter[0].move++;
 		$scope.counter.$save(0);
-		$scope.zachTurn = false;
-		$scope.blaiseTurn = true;
+		$scope.zachTurn = false; //need to update this in firebase
+		$scope.blaiseTurn = true; //need to update this in firebase
 		$scope.checkWin();
 		}
 
@@ -107,8 +116,8 @@ ticApp.controller('ticCtrl', function($scope, $firebase){
 			($scope.board[2].marker == "X" && $scope.board[4].marker == "X" && $scope.board[6].marker == "X") ||
 			($scope.board[0].marker == "X" && $scope.board[4].marker == "X" && $scope.board[8].marker == "X"))
 		{
-			$scope.blaiseWins = true;
-			$scope.zachTurn = false;
+			$scope.blaiseWins = true; //set to true so it shows
+			$scope.zachTurn = false; //turns off 
 
 		}
 		else if (($scope.board[0].marker == "O" && $scope.board[1].marker == "O" && $scope.board[2].marker == "O") ||
