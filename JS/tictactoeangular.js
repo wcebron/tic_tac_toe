@@ -33,7 +33,7 @@ ticApp.controller('ticCtrl', function($scope, $firebase){
   		}
   		else{
   			for(i = 0; i < 9; i++){
-  				$scope.board[i].marker =""; //empties an existing board by iterating through each piece and marking it blank
+  				$scope.board[i].marker = ""; //empties an existing board by iterating through each piece and marking it blank
   				$scope.board.$save(i);  //Saves board data to specified Firebase reference
   			}
   		}
@@ -49,8 +49,6 @@ ticApp.controller('ticCtrl', function($scope, $firebase){
 
   		}
   	});
-
-	//$scope.blaiseTurn = true;  //Sets blaiseTurn to true to start
 
 	$scope.turns.$loaded(function(){
 		if($scope.turns.length === 0){  
@@ -93,35 +91,27 @@ ticApp.controller('ticCtrl', function($scope, $firebase){
 
 	$scope.runGame = function(index){
 
-		if($scope.zachWins === true || $scope.blaiseWins === true){
-			//console.log("Is this running?")
-			//$scope.blaiseTurn = false;
-			//$scope.zachTurn = false;
-			return false;  //stops game in its tracks because there is a winner
+		if($scope.winner[1].zachWins == true || $scope.winner[0].blaiseWins == true){
+			return false;  //stops game in its tracks because there is already a winner
 		}
 
 		if($scope.counter[0].move === 0){
-			$scope.turns[0].player1 = true; //set player1 to true locally.  This makes only the first mover player1.
-			//console.log("What is player one set to" + $scope.turns[0].player1);
+			$scope.turns[0].player1 = true; //at start of game, sets player1 to true locally.  This makes only the first mover player1.
 		}
 
-		if(($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O") && ($scope.counter[0].move % 2 == 0) && ($scope.turns[0].player1)){
-		$scope.board[index].marker = "X" //adds x to the board in firebase (won't work with above)
-		$scope.board.$save(index);
+		if(($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O") && ($scope.counter[0].move % 2 == 0) && ($scope.turns[0].player1 == true)){
+		$scope.board[index].marker = "X" //adds x to the board in firebase 
+		$scope.board.$save(index); //saves the location of the X to firebase
 		$scope.counter[0].move++; //increments counter by one
 		$scope.counter.$save(0); //saves state of counter to firebase
-		//$scope.blaiseTurn = false;	
-		//$scope.zachTurn = true;
 		$scope.checkWin(); //runs win condition function
 		}
 
-		else if (($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O") && ($scope.counter[0].move % 2 == 1) && (!$scope.turns[0].player1)){
+		else if (($scope.board[index].marker !== "X") && ($scope.board[index].marker !== "O") && ($scope.counter[0].move % 2 == 1) && ($scope.turns[0].player1!== true)){
 		$scope.board[index].marker = "O";
 		$scope.board.$save($scope.board[index]);
 		$scope.counter[0].move++;
 		$scope.counter.$save(0);
-		//$scope.zachTurn = false; //need to update this in firebase
-		//$scope.blaiseTurn = true;//need to update this in firebase
 		$scope.checkWin();
 		}
 
@@ -139,7 +129,6 @@ ticApp.controller('ticCtrl', function($scope, $firebase){
 		{
 			$scope.winner[0].blaiseWins = true;  //set to true so it shows Blaise Wins! on the board
 			$scope.winner.$save(0);  //saves into firebase and triggers ng-show
-			//$scope.zachTurn = false; //turns off 
 
 		}
 		else if (($scope.board[0].marker == "O" && $scope.board[1].marker == "O" && $scope.board[2].marker == "O") ||
@@ -153,12 +142,10 @@ ticApp.controller('ticCtrl', function($scope, $firebase){
 		{
 			$scope.winner[1].zachWins = true;
 			$scope.winner.$save(1);
-			//$scope.blaiseTurn = false;
 		}
 		else if ($scope.counter[0].move == 9) {
 			$scope.winner[2].tie = true;
 			$scope.winner.$save(2);
-			//$scope.zachTurn = false;
 		}
 
 	};

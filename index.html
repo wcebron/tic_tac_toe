@@ -6,16 +6,16 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
 
-		<!--Angular-->
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
-		<!-- Firebase -->
-		<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
-		<!-- AngularFire -->
-		<script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
-		<!-- NG Route -->
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.js"></script>
+	<!--Angular-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+	<!-- Firebase -->
+	<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+	<!-- AngularFire -->
+	<script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
+	<!-- NG Route -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.js"></script>
 
-		<script src="js/tictactoeangular.js"></script>
+	<script src="js/tictactoeangular.js"></script>
 </head>
 
 <body ng-app="ticApp" ng-controller="ticCtrl">
@@ -30,14 +30,14 @@
 		</div>
 
 		<div class="players">
-			<h3>Game Center</h3>
-			<span class= "playerOne">Player Blaise: <span ng-show="blaiseTurn">&#x2190 Your Move</span></span>
+			<h3>Turn:</h3>
+			<span class= "playerOne">Player Blaise: <span ng-show="counter[0].move % 2 === 0">&#x2190 Your Move</span></span>
 			<span class="turn"></span>
-			<span class="playerTwo">Player Zach: <span ng-show="zachTurn">&#x2190 Your Move</span> </span>
+			<span class="playerTwo">Player Zach: <span ng-show="counter[0].move % 2 === 1">&#x2190 Your Move</span> </span>
 		</div>
 
 		<div id="board">
-			<div class = "cells" ng-class="{xPlayer: cell.marker=='X', oPlayer: cell.marker=='O'}" ng-repeat="cell in board track by $index" ng-click="runGame($index)">
+			<div class = "cells" ng-class="{'xPlayer animated bounce': cell.marker=='X', 'oPlayer animated fadeInLeft': cell.marker=='O'}" ng-repeat="cell in board track by $index" ng-click="runGame($index)">
 			<!-- ng-class sets the background images, ng-repeat is repeating the div for the cell, if a cell is clicked ng-click runs the runGame function -->
 			{{cell == "" ? "&nbsp;" : cell}}
 			<!-- If cell is blank, then make no blank spaces. If false, put in cell value -->
