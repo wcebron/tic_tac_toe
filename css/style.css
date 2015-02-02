@@ -85,6 +85,19 @@ html {
 	background-size: 80%;
 }
 
+#reset{
+	width: 40%;
+	margin: 6% 0 0 15%;
+	padding: 1%;
+	border-radius: 15px;
+	background-color: #5A3C69;
+}
+
+.reset_button{
+	width: 100%;
+	margin: 0 auto;
+}
+
 /*.hidden{
 	visibility: hidden;
 }*/

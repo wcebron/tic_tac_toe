@@ -150,4 +150,21 @@ ticApp.controller('ticCtrl', function($scope, $firebase){
 
 	};
 
+	$scope.resetBoard = function(){
+		for(var i = 0; i < 9; i++){
+  				$scope.board[i].marker = ""; //empties an existing board by iterating through each piece and marking it blank
+  				$scope.board.$save(i);  //Saves board data to specified Firebase reference
+  			}
+  		$scope.counter[0].move = 0; 
+  		$scope.counter.$save(0);
+  		$scope.winner[0].blaiseWins = false;
+		$scope.winner[1].zachWins = false;
+		$scope.winner[2].tie = false;
+		$scope.winner.$save(0);
+		$scope.winner.$save(1);
+		$scope.winner.$save(2);
+		$scope.turns[0].player1 = false; 
+		$scope.turns.$save(0); 
+	}
+
 });
